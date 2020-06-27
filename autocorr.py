@@ -12,7 +12,10 @@ covid_data.index = pd.to_datetime(covid_data.index)
 covid_data['Total'] = covid_data.sum(axis=1)
 covid_data['Daily'] = covid_data['Total'].diff()
 
-print('Autocorrelation: ' + str(covid_data['Daily'].autocorr(1)))
+print('Autocorrelation (Daily lag)): ' + str(covid_data['Daily'].autocorr(1)))
+print('Autocorrelation (Weekly lag): ' + str(covid_data['Daily'].autocorr(7)))
+print('Autocorrelation (Monthly lag): ' +
+      str(covid_data['Daily'].autocorr(30)))
 fig = plt.figure()
 ax1 = fig.add_subplot(111, ylabel='Autocorrelation')
 pd.plotting.autocorrelation_plot(covid_data[['Daily']].dropna(), ax=ax1)
